@@ -90,6 +90,19 @@ def fill_targets(targets, fasta_file):
                 target[target] = (seq_header, seq)
 
 
+def write_query(query, targets):
+    with open(query.file, 'w') as file:
+        for t in query.targets:
+            file.write(targets[t][0] + "\n")
+            file.write(targets[t][1] + "\n")
+
+
+def write_queries(queries, targets):
+    for q in queries:
+        if not os.path.isdir(queries[q].dir):
+            os.mkdir(queries[q].dir)
+            write_query(queries[q], targets)
+
 
 
 queries, targets = map_query_targets(m8_filepath)
