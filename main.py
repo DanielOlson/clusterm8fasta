@@ -40,16 +40,17 @@ def map_query_targets(m8_file):
             t_end = line[9]
 
             if query in queries:
-                queries[query].targets[target] = (pct_id, q_start, q_end, t_start, t_end, "")
+                queries[query].targets[target] = (pct_id, q_start, q_end, t_start, t_end)
+
 
             else:
                 queries[query] = QueryEntry()
-                queries[query].targets[target] = (pct_id, q_start, q_end, t_start, t_end, "")
+                queries[query].query = query
+                queries[query].targets[target] = (pct_id, q_start, q_end, t_start, t_end)
 
-            if target in targets:
-                targets[target].append(query)
-            else:
-                targets[target] = [query]
+            if target not in targets:
+                targets[target] = ("", "")
+
     return queries, targets
 
 
@@ -66,12 +67,33 @@ def map_query_files(queries, base_dir, files_per_dir):
         i += 1
 
 
-def fill_queries(queries, targets, fasta_file):
+def fill_targets(targets, fasta_file):
+    seq_header = ""
+    seq = ""
+
+    with open(fasta_file, "r") as file:
+        for line in file:
+            line.strip()
+            if line[0] == '>':
+                if len(seq_header) > 0 and len(seq) > 0:
+                    target = seq_header[1:seq_header.find(' ')]
+                    if target in targets:
+                        target[target] = (seq_header, seq)
+                seq_header = line
+                seq = ""
+            else:
+                seq += line
+
+        if len(seq_header) > 0 and len(seq) > 0:
+            target = seq_header[1:seq_header.find(' ')]
+            if target in targets:
+                target[target] = (seq_header, seq)
+
 
 
 
 queries, targets = map_query_targets(m8_filepath)
 map_query_files(queries, out_dir, files_per_dir)
-fill_queries(queries, targets, target_fasta)
+fill_targets(targets, target_fasta)
 
 
