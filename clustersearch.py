@@ -80,7 +80,7 @@ def fill_targets(targets, fasta_file):
                 if len(seq_header) > 0 and len(seq) > 0:
                     target = seq_header[1:seq_header.find(' ')]
                     if target in targets:
-                        target[target] = (seq_header, seq)
+                        targets[target] = (seq_header, seq)
                 seq_header = line
                 seq = ""
             else:
