@@ -5,11 +5,12 @@ import sys
 
 
 if len(sys.argv) != 5:
-    print("Usage: clustersearch <m8_filepath> <target_fasta> <out_dir> <files_per_dir>")
+    print("Usage: clustersearch <m8_filepath>  <target_fasta> <out_dir> <files_per_dir>")
     print("Example: clustersearch ./unireffile.m8 uniref90.fasta ./clusters/ 160")
     exit(0)
 
 m8_filepath = sys.argv[1]
+query_fasta = sys.argv[2]
 target_fasta = sys.argv[2]
 out_dir = sys.argv[3]
 files_per_dir = int(sys.argv[4])
@@ -94,9 +95,11 @@ def fill_targets(targets, fasta_file):
                 targets[target] = (seq_header, seq)
 
 
+
 def write_query(query, targets):
     with open(query.file, 'w') as file:
         for t in query.targets:
+            print(t, targets[t])
             header = targets[t][0]
             header += " :: " + query.targets[t][0]
             header += " " + query.targets[t][1]
