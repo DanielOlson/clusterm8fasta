@@ -64,7 +64,7 @@ def map_query_files(queries, base_dir, files_per_dir):
             cdir = os.path.join(base_dir, "cg_" + str(int(i / files_per_dir)) + "/")
 
         queries[query].dir = cdir
-        queries[query].file = os.path.join(cdir, query + "_" + str(len(query.targets)) + ".fa")
+        queries[query].file = os.path.join(cdir, query + "_" + str(len(queries[query].targets)) + ".fa")
 
         i += 1
 
