@@ -99,7 +99,7 @@ def fill_targets(targets, fasta_file):
 def write_query(query, targets):
     with open(query.file, 'w') as file:
         for t in query.targets:
-            print(t, targets[t])
+           # print(t, targets[t])
             header = targets[t][0]
             header += " :: " + query.targets[t][0]
             header += " " + query.targets[t][1]
