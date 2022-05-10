@@ -25,6 +25,12 @@ class Cluster:
         self.name = self.filename[:filename.rfind('_')]
         self.size = self.filename[filename.rfind('_') + 1:filename.rfind('.')]
 
+class Sequence:
+    def __init__(self, header, seq):
+        self.header = header
+        self.seq = seq
+        self.pct_id = header[header.find('::') + 3:]
+        self.pct_id = float(self.pct_id[:self.pct_id.find(' ')])
 
 def get_all_clusters_in_dir(dir, min_size):
     clusters = []
@@ -32,7 +38,7 @@ def get_all_clusters_in_dir(dir, min_size):
         file_path = os.path.join(dir, file)
         if not os.path.isdir(file_path) and file_path.endswith('.fa'):
             c = Cluster(file_path)
-            if c.size > min_size:
+            if c.size >= min_size:
                 clusters.append(c)
 
     return clusters
@@ -45,7 +51,29 @@ def get_all_clusters(dir, min_size):
             clusters.extend(get_all_clusters_in_dir(d, min_size))
     return clusters
 
-def
+def readCluster(cluster_file, min_length, min_pct_id):
+    sequences = []
+    with open(cluster_file, 'r') as file:
+        header = ""
+        seq = ""
+        for line in file:
+            line = line.rstrip()
+            if len(line) == 0:
+                continue
+            if line[0] == '>':
+                if len(seq) >= min_length:
+                    newSequence = Sequence(header, seq)
+                    if newSequence.pct_id >= min_pct_id:
+                        sequences.append(newSequence)
+                header = line
+                seq = ""
+            else:
+                seq += line
+    return sequences
+
+
+
+
 
 print("Getting clusters...", end=' ')
 clusters = get_all_clusters(cluster_dir, min_clust_size)
