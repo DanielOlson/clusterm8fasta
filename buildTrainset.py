@@ -51,7 +51,7 @@ def get_all_clusters(dir, min_size):
             clusters.extend(get_all_clusters_in_dir(d, min_size))
     return clusters
 
-def readCluster(cluster_file, min_length, min_pct_id):
+def read_cluster(cluster_file, min_length, min_pct_id):
     sequences = []
     with open(cluster_file, 'r') as file:
         header = ""
@@ -71,8 +71,10 @@ def readCluster(cluster_file, min_length, min_pct_id):
                 seq += line
     return sequences
 
-
-
+def read_all_clusters(clusters, min_length, min_pct_id):
+    cluster_sequences = []
+    for c in clusters:
+        #stopped right here
 
 
 print("Getting clusters...", end=' ')
