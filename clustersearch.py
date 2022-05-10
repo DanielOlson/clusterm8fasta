@@ -100,7 +100,13 @@ def fill_targets(targets, fasta_file):
 def write_query(query, targets):
     with open(query.file, 'w') as file:
         for t in query.targets:
-            file.write(targets[t][0] + "\n")
+            header = targets[t][0]
+            header += " :: " + query.targets[t][0]
+            header += " " + query.targets[t][1]
+            header += " " + query.targets[t][2]
+            header += " " + query.targets[t][3]
+            header += " " + query.targets[t][4]
+            file.write(header)
             file.write(targets[t][1] + "\n")
 
 
@@ -113,6 +119,7 @@ def write_queries(queries, targets):
 
 print("Reading m8 file and mapping queries")
 queries, targets = map_query_targets(m8_filepath)
+print("Queries: " + str(len(queries)) + " Targets: " + str(len(targets)))
 print("Mapping queries to files")
 map_query_files(queries, out_dir, files_per_dir)
 print("Reading targets")
