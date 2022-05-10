@@ -104,9 +104,13 @@ def write_queries(queries, targets):
             write_query(queries[q], targets)
 
 
-
+print("Reading m8 file and mapping queries")
 queries, targets = map_query_targets(m8_filepath)
+print("Mapping queries to files")
 map_query_files(queries, out_dir, files_per_dir)
+print("Reading targets")
 fill_targets(targets, target_fasta)
-
+print("Writing queries")
+write_queries(queries, targets)
+print("Done.")
 
