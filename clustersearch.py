@@ -105,7 +105,7 @@ def write_query(query, targets):
             header += " " + query.targets[t][1]
             header += " " + query.targets[t][2]
             header += " " + query.targets[t][3]
-            header += " " + query.targets[t][4]
+            header += " " + query.targets[t][4] + "\n"
             file.write(header)
             file.write(targets[t][1] + "\n")
 
