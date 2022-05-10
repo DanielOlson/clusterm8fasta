@@ -59,9 +59,11 @@ def map_query_targets(m8_file):
 def map_query_files(queries, base_dir, files_per_dir):
     i = 0
     cdir = ""
+    dir_num = 0
     for query in queries:
         if i % files_per_dir == 0:
-            cdir = os.path.join(base_dir, "cg_" + str(int(i / files_per_dir)) + "/")
+            cdir = os.path.join(base_dir, "cg_" + str(dir_num) + "/")
+            dir_num += 1
 
         queries[query].dir = cdir
         queries[query].file = os.path.join(cdir, query + "_" + str(len(queries[query].targets)) + ".fa")
