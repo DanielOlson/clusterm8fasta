@@ -100,7 +100,7 @@ def write_query(query, targets):
     with open(query.file, 'w') as file:
         for t in query.targets:
            # print(t, targets[t])
-            header = targets[t][0]
+            header = targets[t][0][:-1]
             header += " :: " + query.targets[t][0]
             header += " " + query.targets[t][1]
             header += " " + query.targets[t][2]
