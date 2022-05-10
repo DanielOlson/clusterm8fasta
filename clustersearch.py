@@ -79,6 +79,9 @@ def fill_targets(targets, fasta_file):
     with open(fasta_file, "r") as file:
         for line in file:
             line.strip()
+            if len(line) == 0:
+                continue
+
             if line[0] == '>':
                 if len(seq_header) > 0 and len(seq) > 0:
                     target = seq_header[1:seq_header.find(' ')]
@@ -105,8 +108,8 @@ def write_query(query, targets):
             header += " " + query.targets[t][1]
             header += " " + query.targets[t][2]
             header += " " + query.targets[t][3]
-            header += " " + query.targets[t][4] + "\n"
-            file.write(header)
+            header += " " + query.targets[t][4]
+            file.write(header + "\n")
             file.write(targets[t][1] + "\n")
 
 
