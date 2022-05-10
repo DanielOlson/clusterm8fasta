@@ -111,7 +111,7 @@ def write_queries(queries, targets):
     for q in queries:
         if not os.path.isdir(queries[q].dir):
             os.mkdir(queries[q].dir)
-            write_query(queries[q], targets)
+        write_query(queries[q], targets)
 
 
 print("Reading m8 file and mapping queries")
