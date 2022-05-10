@@ -92,6 +92,11 @@ def fill_targets(targets, fasta_file):
                 targets[target] = (seq_header, seq)
 
 
+# Might want to include additional meta data in the header line later
+# such as queries[query].targets[target]
+# which is a tuple of (pct_id, q_start, q_end, t_start, t_end)
+# pct id is probably pretty interesting to us
+
 def write_query(query, targets):
     with open(query.file, 'w') as file:
         for t in query.targets:
