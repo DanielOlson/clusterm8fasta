@@ -1,10 +1,12 @@
+#!/usr/bin/env python3
+
 import os
 import sys
 
 
 if len(sys.argv) != 5:
-    print("Usage: UnirefClusterer <m8_filepath> <target_fasta> <out_dir> <files_per_dir>")
-    print("Example: UnirefClusterer ./unireffile.m8 uniref90.fasta ./clusters/ 160")
+    print("Usage: clustersearch <m8_filepath> <target_fasta> <out_dir> <files_per_dir>")
+    print("Example: clustersearch ./unireffile.m8 uniref90.fasta ./clusters/ 160")
     exit(0)
 
 m8_filepath = sys.argv[1]
