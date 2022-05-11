@@ -23,7 +23,7 @@ class Cluster:
         self.file_path = file_path
         self.filename = self.file_path[self.file_path.rfind("/") + 1:]
         self.name = self.filename[:file_path.rfind('_')]
-        self.size = self.filename[file_path.rfind('_') + 1:file_path.rfind('.')]
+        self.size = int(self.filename[file_path.rfind('_') + 1:file_path.rfind('.')])
 
 class Sequence:
     def __init__(self, header, seq):
