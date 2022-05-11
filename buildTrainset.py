@@ -122,8 +122,12 @@ for i in range(num_seq_pairs):
         seq1 = random.randint(0, len(c))
         seq2 = random.randint(0, len(c))
 
-    seq1 = c[seq1]
-    seq2 = c[seq2]
+    try:
+        seq1 = c[seq1]
+        seq2 = c[seq2]
+    except:
+        print(len(c))
+        print(len(c))
 
     file1.write(seq1.header + " " + str(i) + "\n")
     file2.write(seq2.header + " " + str(i) + "\n")
