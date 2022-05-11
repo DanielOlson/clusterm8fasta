@@ -2,7 +2,7 @@
 
 import os
 import sys
-
+import random
 if len(sys.argv) != 7:
     print("Usage: buildTrainset <cluster_dir>  <min_seq_length> <min_pct_id> <min_cluster_size> <#sequence_pairs> <out_file>")
     print("Example: buildTrainset ./clusters/ 256  0.6 100 200000./clusters/ trainout.fa")
@@ -13,7 +13,7 @@ cluster_dir = sys.argv[1]
 min_seq_len = int(sys.argv[2])
 min_pct_id = float(sys.argv[3])
 min_clust_size = int(sys.argv[4])
-num_seqs = int(sys.argv[5])
+num_seq_pairs = int(sys.argv[5])
 out_1 = 'A_' + sys.argv[6]
 out_2 = 'B_' + sys.argv[6]
 
@@ -32,16 +32,18 @@ class Sequence:
 
         self.meta = header[header.find(':: ') + 3:]
         self.meta = self.meta.split(' ')
-        try:
-            self.pct_id = float(self.meta[0])
-            self.q_start = int(self.meta[1])
-            self.q_end = int(self.meta[2])
-            self.t_start = int(self.meta[3])
-            self.t_end = int(self.meta[4])
-        except:
-            print("----")
-            print(header)
-            print(self.meta)
+        #  try:
+        self.pct_id = float(self.meta[0])
+        self.q_start = int(self.meta[1])
+        self.q_end = int(self.meta[2])
+        self.t_start = int(self.meta[3])
+        self.t_end = int(self.meta[4])
+
+
+#    except:
+#        print("----")
+    #        print(header)
+    #        print(self.meta)
 
 
 def get_all_clusters_in_dir(dir, min_size):
@@ -97,11 +99,39 @@ def read_all_clusters(clusters, min_clust_size, min_length, min_pct_id):
 
     return cluster_sequences, num_sequences
 
-
 print("Getting clusters...", end=' ', flush=True)
 clusters = get_all_clusters(cluster_dir, min_clust_size)
 print(str(len(clusters)) + " found")
 print("Reading sequences...", end=' ',flush=True)
-clusters, num_seqs = read_all_clusters(clusters, min_clust_size, min_seq_len, min_pct_id)
-print(str(clusters) + " clusters remain. " + str(num_seqs) + " sequences")
+clusters, total_seqs = read_all_clusters(clusters, min_clust_size, min_seq_len, min_pct_id)
+print(str(clusters) + " clusters remain. " + str(total_seqs) + " sequences", flush=True)
 
+print("Writing random sequence pairs", end=" ", flush=True)
+
+random.seed()
+
+file1 = open(out_1, 'w')
+file2 = open(out_2, 'w')
+
+for i in range(num_seq_pairs):
+    #grab a random cluster
+    c = clusters[random.randint(0, len(clusters))]
+    seq1 = 0
+    seq2 = 0
+    while seq1 == seq2:
+        seq1 = random.randint(0, len(c))
+        seq2 = random.randint(0, len(c))
+
+    seq1 = c[seq1]
+    seq2 = c[seq2]
+
+    file1.write(seq1.header + " " + str(i) + "\n")
+    file2.write(seq2.header + " " + str(i) + "\n")
+
+    file1.write(seq1.seq + "\n")
+    file2.write(seq2.seq + "\n")
+
+file1.close()
+file2.close()
+
+print("Done.\n", flush=True)
