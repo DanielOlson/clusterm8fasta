@@ -2,7 +2,6 @@
 
 import os
 import sys
-import
 
 if len(sys.argv) != 7:
     print("Usage: buildTrainset <cluster_dir>  <min_seq_length> <min_pct_id> <min_cluster_size> <#sequence_pairs> <out_file>")
