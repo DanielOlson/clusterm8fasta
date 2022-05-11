@@ -22,15 +22,23 @@ out_2 = 'B_' + sys.argv[6]
 class Cluster:
     def __init__(self, file_path):
         self.file_path = file_path
-        self.name = self.filename[:filename.rfind('_')]
-        self.size = self.filename[filename.rfind('_') + 1:filename.rfind('.')]
+        self.filename = self.file_path[self.file_path.rfind("/") + 1:]
+        self.name = self.filename[:file_path.rfind('_')]
+        self.size = self.filename[file_path.rfind('_') + 1:file_path.rfind('.')]
 
 class Sequence:
     def __init__(self, header, seq):
         self.header = header
         self.seq = seq
-        self.pct_id = header[header.find('::') + 3:]
-        self.pct_id = float(self.pct_id[:self.pct_id.find(' ')])
+        self.meta = header[header.find('::') + 3:]
+        self.meta = self.meta.split(' ')
+
+        self.pct_id = float(self.meta[0])
+        self.q_start = int(self.meta[1])
+        self.q_end = int(self.meta[2])
+        self.t_start = int(self.meta[3])
+        self.t_end = int(self.meta[4])
+
 
 def get_all_clusters_in_dir(dir, min_size):
     clusters = []
@@ -51,6 +59,11 @@ def get_all_clusters(dir, min_size):
             clusters.extend(get_all_clusters_in_dir(d, min_size))
     return clusters
 
+
+#need to add some stuff to process sequences here
+
+def process_sequence(header, sequence)
+
 def read_cluster(cluster_file, min_length, min_pct_id):
     sequences = []
     with open(cluster_file, 'r') as file:
@@ -63,23 +76,32 @@ def read_cluster(cluster_file, min_length, min_pct_id):
             if line[0] == '>':
                 if len(seq) >= min_length:
                     newSequence = Sequence(header, seq)
-                    if newSequence.pct_id >= min_pct_id:
+                    if newSequence.pct_id >= min_pct_id and newSequence.t_end - newSequence.t_start > (min_length / 2.0):
                         sequences.append(newSequence)
+
                 header = line
                 seq = ""
             else:
                 seq += line
     return sequences
 
-def read_all_clusters(clusters, min_length, min_pct_id):
+def read_all_clusters(clusters, min_clust_size, min_length, min_pct_id):
     cluster_sequences = []
+    num_sequences = 0
     for c in clusters:
-        #stopped right here
+        new_sequences = read_cluster(c.file_path, min_length, min_pct_id)
+        if (len(new_sequences) < min_clust_size):
+            continue
+        cluster_sequences.append(new_sequences)
+        num_sequences += len(new_sequences)
+
+    return cluster_sequences, num_sequences
 
 
 print("Getting clusters...", end=' ')
 clusters = get_all_clusters(cluster_dir, min_clust_size)
 print(str(len(clusters)) + " found")
 print("Reading sequences...", end=' ')
-
+clusters, num_seqs = read_all_clusters(clusters, min_clust_size, min_seq_len, min_pct_id)
+print(str(clusters) + " clusters remain. " + str(num_seqs) + " sequences")
 
