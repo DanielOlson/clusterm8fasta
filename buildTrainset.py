@@ -104,7 +104,7 @@ clusters = get_all_clusters(cluster_dir, min_clust_size)
 print(str(len(clusters)) + " found")
 print("Reading sequences...", end=' ',flush=True)
 clusters, total_seqs = read_all_clusters(clusters, min_clust_size, min_seq_len, min_pct_id)
-print(str(clusters) + " clusters remain. " + str(total_seqs) + " sequences", flush=True)
+print(str(len(clusters)) + " clusters remain. " + str(total_seqs) + " sequences", flush=True)
 
 print("Writing random sequence pairs", end=" ", flush=True)
 
