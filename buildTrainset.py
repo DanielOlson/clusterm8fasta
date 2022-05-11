@@ -29,14 +29,19 @@ class Sequence:
     def __init__(self, header, seq):
         self.header = header
         self.seq = seq
-        self.meta = header[header.find('::') + 3:]
-        self.meta = self.meta.split(' ')
+        try:
+            self.meta = header[header.find('::') + 3:]
+            self.meta = self.meta.split(' ')
 
-        self.pct_id = float(self.meta[0])
-        self.q_start = int(self.meta[1])
-        self.q_end = int(self.meta[2])
-        self.t_start = int(self.meta[3])
-        self.t_end = int(self.meta[4])
+            self.pct_id = float(self.meta[0])
+            self.q_start = int(self.meta[1])
+            self.q_end = int(self.meta[2])
+            self.t_start = int(self.meta[3])
+            self.t_end = int(self.meta[4])
+        except():
+            print("----")
+            print(header)
+            print(self.meta)
 
 
 def get_all_clusters_in_dir(dir, min_size):
@@ -93,10 +98,10 @@ def read_all_clusters(clusters, min_clust_size, min_length, min_pct_id):
     return cluster_sequences, num_sequences
 
 
-print("Getting clusters...", end=' ')
+print("Getting clusters...", end=' ', flush=True)
 clusters = get_all_clusters(cluster_dir, min_clust_size)
 print(str(len(clusters)) + " found")
-print("Reading sequences...", end=' ')
+print("Reading sequences...", end=' ',flush=True)
 clusters, num_seqs = read_all_clusters(clusters, min_clust_size, min_seq_len, min_pct_id)
 print(str(clusters) + " clusters remain. " + str(num_seqs) + " sequences")
 
