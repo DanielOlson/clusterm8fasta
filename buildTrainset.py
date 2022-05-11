@@ -38,7 +38,7 @@ class Sequence:
             self.q_end = int(self.meta[2])
             self.t_start = int(self.meta[3])
             self.t_end = int(self.meta[4])
-        except():
+        except:
             print("----")
             print(header)
             print(self.meta)
