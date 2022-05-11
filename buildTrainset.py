@@ -119,16 +119,11 @@ for i in range(num_seq_pairs):
     tseq1 = 0
     tseq2 = 0
     while tseq1 == tseq2:
-        tseq1 = random.randint(0, len(c))
-        tseq2 = random.randint(0, len(c))
+        tseq1 = random.randint(0, len(c) - 1)
+        tseq2 = random.randint(0, len(c) - 1)
 
-    try:
-        seq1 = c[tseq1]
-        seq2 = c[tseq2]
-    except:
-        print("")
-        print(len(c), tseq1)
-        print(len(c), tseq2)
+    seq1 = c[tseq1]
+    seq2 = c[tseq2]
 
     file1.write(seq1.header + " " + str(i) + "\n")
     file2.write(seq2.header + " " + str(i) + "\n")
