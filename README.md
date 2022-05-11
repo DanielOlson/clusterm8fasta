@@ -1,2 +1,2 @@
 # clusterm8fasta
-Create fasta clusters using an m8 file. Every query gets its own FASTA file
+This whole thing is spaghet. Ugh. Each script does something. Not well, but it does it
