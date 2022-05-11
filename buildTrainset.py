@@ -29,10 +29,10 @@ class Sequence:
     def __init__(self, header, seq):
         self.header = header
         self.seq = seq
-        try:
-            self.meta = header[header.find('::') + 3:]
-            self.meta = self.meta.split(' ')
 
+        self.meta = header[header.find('::') + 3:]
+        self.meta = self.meta.split(' ')
+        try:
             self.pct_id = float(self.meta[0])
             self.q_start = int(self.meta[1])
             self.q_end = int(self.meta[2])
