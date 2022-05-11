@@ -59,10 +59,6 @@ def get_all_clusters(dir, min_size):
     return clusters
 
 
-#need to add some stuff to process sequences here
-
-def process_sequence(header, sequence)
-
 def read_cluster(cluster_file, min_length, min_pct_id):
     sequences = []
     with open(cluster_file, 'r') as file:
