@@ -115,7 +115,7 @@ file2 = open(out_2, 'w')
 
 for i in range(num_seq_pairs):
     #grab a random cluster
-    c = clusters[random.randint(0, len(clusters))]
+    c = clusters[random.randint(0, len(clusters) - 1)]
     tseq1 = 0
     tseq2 = 0
     while tseq1 == tseq2:
