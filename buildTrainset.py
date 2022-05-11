@@ -11,7 +11,7 @@ if len(sys.argv) != 7:
 
 cluster_dir = sys.argv[1]
 min_seq_len = int(sys.argv[2])
-pct_id = float(sys.argv[3])
+min_pct_id = float(sys.argv[3])
 min_clust_size = int(sys.argv[4])
 num_seqs = int(sys.argv[5])
 out_1 = 'A_' + sys.argv[6]
