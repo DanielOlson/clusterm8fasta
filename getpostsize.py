@@ -23,7 +23,7 @@ total_bytes = 0
 for i in range(len(lines1)):
     if i % 2 == 0:
         continue
-    total_bytes += len(lines[i]) * (len(lines[i]) + 5)
+    total_bytes += len(lines1[i]) * (len(lines2[i]) + 5)
 
 print(total_bytes)
 
