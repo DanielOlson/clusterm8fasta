@@ -134,4 +134,4 @@ for i in range(num_seq_pairs):
 file1.close()
 file2.close()
 
-print("Done.\n", flush=True)
+print("Done.", flush=True)
