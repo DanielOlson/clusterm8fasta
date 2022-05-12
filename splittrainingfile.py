@@ -47,10 +47,8 @@ for i in range(len(lines1)):
         seq1 = lines1[i]
         seq2 = lines2[i]
 
-file1.close()
-file2.close()
-
-
+in_file1.close()
+in_file2.close()
 if len(sequences_1) != len(sequences_2):
     print("number of sequences are not equal to eachother")
     exit(-1)
