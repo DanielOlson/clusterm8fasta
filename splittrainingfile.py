@@ -9,7 +9,7 @@ if len(sys.argv) != 5:
 in_file1 = sys.argv[1]
 in_file2 = sys.argv[2]
 dir = sys.argv[3]
-seqs_per_dir = sys.argv[5]
+seqs_per_dir = sys.argv[4]
 
 in_file1 = open(in_file1)
 in_file2 = open(in_file2)
