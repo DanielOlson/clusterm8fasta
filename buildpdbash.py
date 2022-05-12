@@ -39,7 +39,7 @@ def create_script_for_dir(subdir):
 
     file_path = os.path.join(subdir, "postdump.sh")
     with open(file_path, 'w') as f:
-        f.write("module load python3")
+        f.write("module load python3\n")
 
         for file_A in A_seqs:
             file_B = 'B' + file_A[1:]
@@ -54,7 +54,7 @@ def create_script_for_dir(subdir):
             f.write(post_dump_path + " " + file_A + " " + file_B + " > " + out + "\n")
 
 
-        f.write("python3 posttonp post.npz " + subdir + "/*.post")
+        f.write("python3 posttonp post.npz " + subdir + "/*.post\n")
 
 
 
