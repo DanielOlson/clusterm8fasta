@@ -24,7 +24,7 @@ for subdir in os.listdir(train_dir):
         for file in os.listdir(subdir):
             file = os.path.join(subdir, file)
             if not os.path.isdir(file):
-                if file.endswith('.post')
+                if file.endswith('.post'):
                     removal_targets.append(file)
 
 for i in removal_targets:
