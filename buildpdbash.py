@@ -31,8 +31,7 @@ def create_script_for_dir(subdir):
 
 
     for file_A in A_seqs:
-        B_version = file_A
-        B_version[0] = 'B'
+        B_version = 'B' + file_A[1:]
         if not B_version in B_seqs:
             print(file_A, "has no counterpart", B_version)
             exit(-1)
@@ -43,8 +42,7 @@ def create_script_for_dir(subdir):
         f.write("module load python3")
 
         for file_A in A_seqs:
-            file_B = file_A
-            file_B[0] = 'B'
+            file_B = 'B' + file_A[1:]
 
             out = file_A[2:-3]
             out = out + ".post"
