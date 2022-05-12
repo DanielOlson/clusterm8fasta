@@ -1,4 +1,6 @@
 import sys
+from math import ceil
+import os
 
 if len(sys.argv) != 5:
     print("Usage: splittrainingfile <in_file_1> <in_file_2> <dir> <sequences_per_subdir>")
@@ -31,6 +33,7 @@ seq2 = ""
 sequences_1 = []
 sequences_2 = []
 
+print("Reading sequences from training set")
 for i in range(len(lines1)):
     if i % 2 == 0:
         if len(header1) > 0:
@@ -47,6 +50,7 @@ for i in range(len(lines1)):
 file1.close()
 file2.close()
 
+
 if len(sequences_1) != len(sequences_2):
     print("number of sequences are not equal to eachother")
     exit(-1)
@@ -54,4 +58,29 @@ if len(sequences_1) != len(sequences_2):
 print("Found " + str(len(sequences_1)) + " sequences")
 
 # Create directories and output files.
+num_dirs = ceil((2 * len(sequences_1)) / seqs_per_dir)
+print("Creating", num_dirs, "directories")
+for i in range(num_dirs):
+    path = os.path.join(dir, "sub_" + str(i))
+    if not os.path.isdir(path):
+        os.mkdir(path)
 
+print("Writing sequence pairs")
+for i in range(len(sequences_1)):
+    subdir = os.path.join(dir, "sub_" + str(i % num_dirs) + "/")
+    fileA = os.path.join(subdir, "A_" + str(i) + ".fa")
+    fileB = os.path.join(subdir, "B_" + str(i) + ".fa")
+
+    fileA = open(fileA, 'w')
+    fileB = open(fileB, 'w')
+
+    fileA.write(sequences_1[i][0] + "\n")
+    fileA.write(sequences_1[i][1] + "\n")
+
+    fileB.write(sequences_2[i][0] + "\n")
+    fileB.write(sequences_2[i][1] + "\n")
+
+    fileA.close()
+    fileB.close()
+
+print("Done.")
