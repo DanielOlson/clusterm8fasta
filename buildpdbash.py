@@ -54,7 +54,7 @@ def create_script_for_dir(subdir):
             f.write(post_dump_path + " " + file_A + " " + file_B + " > " + out + "\n")
 
 
-        f.write("python3 posttonp post.npz " + subdir + "/*.post\n")
+        f.write("python3 ~/scripts/clusterm8fasta/posttonp.py " + subdir + "post.npz " + subdir + "/*.post\n")
 
 
 
