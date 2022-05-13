@@ -27,7 +27,7 @@ class Cluster:
         self.size = int(self.filename[self.filename.rfind('_') + 1:self.filename.rfind('.')])
 
 class Sequence:
-    def __init__(self, header, seq):
+    def __init__(self, header, seq, cluster_name):
         self.header = header
         self.seq = seq
 
@@ -39,6 +39,7 @@ class Sequence:
         self.q_end = int(self.meta[2])
         self.t_start = int(self.meta[3])
         self.t_end = int(self.meta[4])
+        self.cluster_name = cluster_name
 
 
 #    except:
@@ -79,11 +80,11 @@ def read_cluster(cluster_file, min_length, min_pct_id):
                 continue
             if line[0] == '>':
                 if min_length <= len(seq) <= max_seq_len:
-                    newSequence = Sequence(header, seq)
+                    newSequence = Sequence(header, seq, cluster_name)
                     if newSequence.pct_id >= min_pct_id and newSequence.t_end - newSequence.t_start > (min_length / 2.0):
                         sequences.append(newSequence)
 
-                header = line + cluster_name
+                header = line
                 seq = ""
             else:
                 seq += line
@@ -127,8 +128,8 @@ for i in range(num_seq_pairs):
     seq1 = c[tseq1]
     seq2 = c[tseq2]
 
-    file1.write(seq1.header + " " + str(i) + "\n")
-    file2.write(seq2.header + " " + str(i) + "\n")
+    file1.write(seq1.header + " " + str(i) + " " + seq1.cluster_name + "\n")
+    file2.write(seq2.header + " " + str(i) + " " + seq2.cluster_name + "\n")
 
     file1.write(seq1.seq + "\n")
     file2.write(seq2.seq + "\n")
