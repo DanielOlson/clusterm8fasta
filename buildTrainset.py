@@ -70,7 +70,7 @@ def get_all_clusters(dir, min_size):
 def read_cluster(cluster_file, min_length, min_pct_id):
     sequences = []
     with open(cluster_file, 'r') as file:
-        cluster_name = cluster_file[cluster_file.rfind('/') + 1:cluster_file.r_find('.')]
+        cluster_name = cluster_file[cluster_file.rfind('/') + 1:cluster_file.rfind('.')]
         header = ""
         seq = ""
         for line in file:
