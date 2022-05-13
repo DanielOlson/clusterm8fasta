@@ -3,19 +3,20 @@
 import os
 import sys
 import random
-if len(sys.argv) != 7:
-    print("Usage: buildTrainset <cluster_dir>  <min_seq_length> <min_pct_id> <min_cluster_size> <#sequence_pairs> <out_file>")
-    print("Example: buildTrainset ./clusters/ 256  0.6 100 200000./clusters/ trainout.fa")
+if len(sys.argv) != 8:
+    print("Usage: buildTrainset <cluster_dir> <min_seq_length> <max_seq_length> <min_pct_id> <min_cluster_size> <#sequence_pairs> <out_file>")
+    print("Example: buildTrainset ./clusters/ 256 600  0.6 100 200000./clusters/ trainout.fa")
     print("Outputs two fasta files. E.g: A_trainout.fa and B_trainout.fa")
     exit(0)
 
 cluster_dir = sys.argv[1]
 min_seq_len = int(sys.argv[2])
-min_pct_id = float(sys.argv[3])
-min_clust_size = int(sys.argv[4])
-num_seq_pairs = int(sys.argv[5])
-out_1 = 'A_' + sys.argv[6]
-out_2 = 'B_' + sys.argv[6]
+max_seq_len = int(sys.argv[3])
+min_pct_id = float(sys.argv[4])
+min_clust_size = int(sys.argv[5])
+num_seq_pairs = int(sys.argv[6])
+out_1 = 'A_' + sys.argv[7]
+out_2 = 'B_' + sys.argv[7]
 
 
 class Cluster:
@@ -76,7 +77,7 @@ def read_cluster(cluster_file, min_length, min_pct_id):
             if len(line) == 0:
                 continue
             if line[0] == '>':
-                if len(seq) >= min_length:
+                if min_length <= len(seq) <= max_seq_len:
                     newSequence = Sequence(header, seq)
                     if newSequence.pct_id >= min_pct_id and newSequence.t_end - newSequence.t_start > (min_length / 2.0):
                         sequences.append(newSequence)
