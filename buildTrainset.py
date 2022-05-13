@@ -70,6 +70,7 @@ def get_all_clusters(dir, min_size):
 def read_cluster(cluster_file, min_length, min_pct_id):
     sequences = []
     with open(cluster_file, 'r') as file:
+        cluster_name = cluster_file[cluster_file.rfind('/') + 1:cluster_file.r_find('.')]
         header = ""
         seq = ""
         for line in file:
@@ -82,7 +83,7 @@ def read_cluster(cluster_file, min_length, min_pct_id):
                     if newSequence.pct_id >= min_pct_id and newSequence.t_end - newSequence.t_start > (min_length / 2.0):
                         sequences.append(newSequence)
 
-                header = line
+                header = line + cluster_name
                 seq = ""
             else:
                 seq += line
