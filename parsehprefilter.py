@@ -6,7 +6,7 @@ if len(sys.argv) != 2:
     print("Usage: parsehprefilter.py <input file>")
     exit(0)
 
-input_file = sys.argv(1)
+input_file = sys.argv[1]
 
 passed_MSV = 0
 passed_bias = 0
