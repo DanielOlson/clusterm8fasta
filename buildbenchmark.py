@@ -35,7 +35,7 @@ class Sequence:
         self.q_start = 0#int(self.meta[1])
         self.q_end = 0#int(self.meta[2])
         self.t_start = 0# int(self.meta[3])
-        self.t_end = 0#int(self.meta[4])
+        self.t_end = 10000#int(self.meta[4])
         self.cluster_name = 0# cluster_name
 
 
