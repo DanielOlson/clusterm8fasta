@@ -104,7 +104,7 @@ clusters = get_all_clusters(cluster_dir, 0)
 print(str(len(clusters)) + " found")
 print("Reading sequences...", end=' ',flush=True)
 sequences, total_seqs = read_all_clusters(clusters, 0, 0, 0)
-
+print(str(total_seqs) + " found")
 print("Writing sequences", end=" ", flush=True)
 
 random.seed()
