@@ -3,7 +3,7 @@
 import os
 import sys
 import random
-import torch
+
 if len(sys.argv) != 5:
     print("Usage: buildbenchmark <clusters dir> <num queries> <num targets> <out_file>")
     exit()
@@ -76,7 +76,7 @@ def read_cluster(cluster_file, min_length, min_pct_id):
             if len(line) == 0:
                 continue
             if line[0] == '>':
-                if min_length <= len(seq) <= max_seq_len:
+                if min_length <= len(seq):
                     newSequence = Sequence(header, seq, cluster_name)
                     if newSequence.pct_id >= min_pct_id and newSequence.t_end - newSequence.t_start > (min_length / 2.0):
                         sequences.append(newSequence)
