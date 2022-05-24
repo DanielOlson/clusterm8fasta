@@ -28,15 +28,15 @@ class Sequence:
         self.header = header
         self.seq = seq
 
-        self.meta = header[header.find(':: ') + 3:]
-        self.meta = self.meta.split(' ')
+       # self.meta = header[header.find(':: ') + 3:]
+       # self.meta = self.meta.split(' ')
         #  try:
-        self.pct_id = float(self.meta[0])
-        self.q_start = int(self.meta[1])
-        self.q_end = int(self.meta[2])
-        self.t_start = int(self.meta[3])
-        self.t_end = int(self.meta[4])
-        self.cluster_name = cluster_name
+        self.pct_id = 1#float(self.meta[0])
+        self.q_start = 0#int(self.meta[1])
+        self.q_end = 0#int(self.meta[2])
+        self.t_start = 0# int(self.meta[3])
+        self.t_end = 0#int(self.meta[4])
+        self.cluster_name = 0# cluster_name
 
 
 #    except:
