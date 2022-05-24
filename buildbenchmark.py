@@ -122,7 +122,7 @@ for i in range(num_queries):
     #grab random sequence
     seq = -1
     while seq in used_seqs:
-        seq = random.randrange(0, len(sequences))
+        seq = random.randint(0, len(sequences) - 1)
     used_seqs[seq] = True
 
     seq = sequences[seq]
@@ -132,7 +132,7 @@ for i in range(num_targets):
     # grab random sequence
     seq = -1
     while seq in used_seqs:
-        seq = random.randrange(0, len(sequences))
+        seq = random.randint(0, len(sequences) - 1)
     used_seqs[seq] = True
 
     seq = sequences[seq]
