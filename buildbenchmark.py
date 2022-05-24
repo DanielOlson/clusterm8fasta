@@ -78,7 +78,7 @@ def read_cluster(cluster_file, min_length, min_pct_id):
             if line[0] == '>':
                 if min_length <= len(seq):
                     newSequence = Sequence(header, seq, cluster_name)
-                    if newSequence.pct_id >= min_pct_id and newSequence.t_end - newSequence.t_start > (min_length / 2.0):
+                    if newSequence.pct_id >= min_pct_id and newSequence.t_end - newSequence.t_start >= (min_length / 2.0):
                         sequences.append(newSequence)
 
                 header = line
