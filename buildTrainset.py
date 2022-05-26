@@ -3,7 +3,7 @@
 import os
 import sys
 import random
-if len(sys.argv) != 8:
+if len(sys.argv) != 9:
     print("Usage: buildTrainset <cluster_dir> <min_seq_length> <max_seq_length> <min_pct_id> <max_pct_id> <min_cluster_size> <#sequence_pairs> <out_file>")
     print("Example: buildTrainset ./clusters/ 180 10000  0.1 0.6 100 500000./clusters/ trainout.fa")
     print("Outputs two fasta files. E.g: A_trainout.fa and B_trainout.fa")
