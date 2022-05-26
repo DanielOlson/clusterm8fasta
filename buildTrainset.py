@@ -32,7 +32,7 @@ class Sequence:
         self.header = header
         self.seq = seq
 
-        self.meta = header[header.find(':: ') + 3:]
+        self.meta = header[header.rfind(':: ') + 3:]
         self.meta = self.meta.split(' ')
         #  try:
         self.pct_id = float(self.meta[0])
